@@ -1,21 +1,16 @@
-import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+
+import { StoredProductsProvider } from '@shared/contexts/StoredProducts';
+import { ThemeProvider } from '@shared/contexts/Theme.context';
+
+import { router } from './router';
+
 import './App.scss';
 
-interface Props {
-  onClick: () => void;
-  children: React.ReactNode;
-}
-
-export const Provider: React.FC<Props> = React.memo(({ onClick, children }) => (
-  <button type="button" onClick={onClick}>
-    {children}
-  </button>
-));
-
-export const App: React.FC = () => {
-  return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>TodoList</Provider>
-    </div>
-  );
-};
+export const App = () => (
+  <ThemeProvider>
+    <StoredProductsProvider>
+      <RouterProvider router={router} />
+    </StoredProductsProvider>
+  </ThemeProvider>
+);
